@@ -10,4 +10,40 @@ html
     rel='stylesheet' type='text/css')
     link(rel='stylesheet', href='_css/main.css')
   body
+    .container
+      .calendar
+        .calendar-block
+          header
+            h2.calendar-main__title Январь 2016
+            ul.calendar-main__nav
+              li Сегодня
+              li Месяц
+              li Год
+          .calendar-main
+            .calendar__wrap
+              .row
+                .col Пн
+                .col Вт
+                .col Ср
+                .col Чт
+                .col Пт
+                .col Сб
+                .col Вс
+            .calendar__prev
+            .calendar__next
+          .calendar-count
+            ul.count-list
+              li.count-list__item Завершенные <span>48</span>
+              li.count-list__item Незавершенные <span>12</span>
+              li.count-list__item Все задачи <span>60</span>
+            .add_note
+        .calendar-notes
+          .calendar-notes__date
+            p.date-title 17 Январь
+            p.date-subtitle Вескресенье
+          ul.calendar-notes__list
+            li <span>15:00</span> Design personal calendar
+            li <span>18:00</span> Take volvo and go for a ride
+            li <span>20:30</span> Search for a job
+            li <span>21:45</span> Go with the dog for a walk
     script(src='_js/main.js')

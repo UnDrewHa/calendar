@@ -14,6 +14,7 @@ html {
   box-sizing: border-box;
   color: #000;
   font-size: 20px;
+  height: 100%;
   line-height: 1.4;
 }
 
@@ -90,7 +91,9 @@ textarea {
    ========================================================================== */
 
 body {
-
+  background: url('../_i/bg_body.jpg') top no-repeat;
+  background-size: cover;
+  height: 100%;
 }
 
 ul {
@@ -109,6 +112,8 @@ ul {
   max-width: 1000px;
   padding: 0 1rem;
 }
+
+
 
 
 /* ==========================================================================
