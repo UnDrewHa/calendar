@@ -113,9 +113,124 @@ ul {
   padding: 0 1rem;
 }
 
+.container {
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.calendar {
+  @include clearfix;
+  box-shadow: 0 0 50px 0 rgba(0,0,0, .5);
+  height: 90%;
+  position: relative;
+}
+
+.calendar-block {
+  background: #fff;
+  height: 100%;
+  float: left;
+  width: 65%;
+}
+
+.calendar-notes {
+  background: #504aa4;
+  background: linear-gradient(to bottom,  #504aa4 0%,#4267b5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#504aa4', endColorstr='#4267b5',GradientType=0 );
+  height: 100%;
+  float: left;
+  width: 35%;
+}
 
 
+header {
+  background: #f5f5f3;
+  display: flex;
+  justify-content: space-between;
+  height: 6rem;
+  padding: 0 5.49%;
+  position: relative;
+}
 
+.calendar-main__title {
+  color: #898d90;
+  font: 300 2rem/6rem $sans;
+  margin: 0;
+}
+
+.calendar-main__nav {
+  align-self: center;
+  white-space: nowrap;
+    li {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: .5em;
+      color: #898d90;
+      cursor: pointer;
+      display: inline-block;
+      font: .75rem/1 $sans;
+      padding: .5em;
+      transition: all .4s;
+        &.active {
+          background: #fff;
+          border: 1px solid #e3e3e1;
+          border-radius: .5em;
+        }
+    }
+    li + li {
+      margin-left: .5em;
+    }
+}
+
+.calendar-main {
+  margin: 6.5% auto 0;
+  position: relative;
+  width: 85%;
+}
+.calendar__wrap {
+  .row:first-child {
+    border-bottom: 2px solid #efefec;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 85%;
+}
+.col {
+  color: #575e64;
+  height: 3.5rem;
+  font: bold .75rem/3.5rem $sans;
+  text-align: center;
+  text-transform: uppercase;
+  width: 4.5rem;
+}
+
+.calendar__prev {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background: url('../_i/icon_prev.png') center no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  height: 1.45rem;
+  margin-top: -.75rem;
+  width: .9rem;
+}
+
+.calendar__next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  background: url('../_i/icon_next.png') center no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  height: 1.45rem;
+  margin-top: -.75rem;
+  width: .9rem;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
