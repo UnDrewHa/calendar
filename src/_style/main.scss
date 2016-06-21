@@ -125,15 +125,16 @@ ul {
   @include clearfix;
   box-shadow: 0 0 50px 0 rgba(0,0,0, .5);
   height: 90%;
-  flex: 1 0 100%;
+  flex: 1 0 auto;
   position: relative;
-  width: 100%;
+  max-width: 1400px;
 }
 
 .calendar-block {
   background: #fff;
   height: 100%;
   float: left;
+  margin: 0 auto;
   width: 65%;
 }
 
@@ -208,6 +209,7 @@ header {
 }
 .col {
   color: #575e64;
+  cursor: pointer;
   border-radius: 50%;
   background: #fff;
   height: 2.5rem;
@@ -216,6 +218,12 @@ header {
   text-transform: uppercase;
   transition: all .3s;
   width: 2.5rem;
+    &.unactive {
+      color: #d6d6ce;
+    }
+  &:hover {
+    font-weight: bold;
+  }
     &.selected {
       box-shadow: 0 0 10px 0 #e75a47;
       color: #fff;
@@ -224,9 +232,6 @@ header {
     }
     &.contain {
       cursor: pointer;
-      &:hover {
-        font-weight: bold;
-      }
     }
     &.contain::before {
       position: absolute;
