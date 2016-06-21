@@ -31,61 +31,63 @@ html
                 .col Сб
                 .col Вс
               .row
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
+                .col 29
+                .col 30
+                .col 31
+                .col 1
+                .col 2
+                .col 3
+                .col 4
               .row
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
+                .col.contain.done 5
+                .col 6
+                .col 7
+                .col 8
+                .col 9
+                .col 10
+                .col 11
               .row
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
+                .col 12
+                .col 13
+                .col.contain.done 14
+                .col 15
+                .col 16
+                .col.selected.contain 17
+                .col 18
               .row
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
+                .col 19
+                .col 20
+                .col 21
+                .col.contain 22
+                .col 23
+                .col 24
+                .col 25
               .row
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
-                .col
+                .col 26
+                .col 27
+                .col 28
+                .col 29
+                .col.contain.done 30
+                .col.contain 31
+                .col 1
 
             .calendar__prev
             .calendar__next
           .calendar-count
             ul.count-list
-              li.count-list__item Завершенные <span>48</span>
-              li.count-list__item Незавершенные <span>12</span>
-              li.count-list__item Все задачи <span>60</span>
+              li.count-list__item.done Завершенные <span>48</span>
+              li.count-list__item.undone Незавершенные <span>12</span>
+              li.count-list__item.all Все задачи <span>60</span>
             .add_note
         .calendar-notes
           .calendar-notes__date
             p.date-title 17 Январь
-            p.date-subtitle Вескресенье
-          ul.calendar-notes__list
-            li <span>15:00</span> Design personal calendar
-            li <span>18:00</span> Take volvo and go for a ride
-            li <span>20:30</span> Search for a job
-            li <span>21:45</span> Go with the dog for a walk
+            p.date-subtitle Воскресенье
+          ul.notes-list
+            li.notes-list__item <span>15:00</span> Design personal calendar
+            li.notes-list__item <span>18:00</span> Take volvo and go for a ride
+            li.notes-list__item <span>20:30</span> Search for a job
+            li.notes-list__item <span>21:45</span> Go with the dog for a walk
+            li.notes-list__item <span>20:30</span> Search for a job
+            li.notes-list__item <span>15:00</span> Design personal calendar
     script(src='_js/main.js')

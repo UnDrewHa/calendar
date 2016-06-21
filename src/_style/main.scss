@@ -114,6 +114,8 @@ ul {
 }
 
 .container {
+  display: flex;
+  align-items: center;
   height: 100%;
   margin: 0 auto;
   max-width: 1400px;
@@ -123,7 +125,9 @@ ul {
   @include clearfix;
   box-shadow: 0 0 50px 0 rgba(0,0,0, .5);
   height: 90%;
+  flex: 1 0 100%;
   position: relative;
+  width: 100%;
 }
 
 .calendar-block {
@@ -190,22 +194,59 @@ header {
 .calendar__wrap {
   .row:first-child {
     border-bottom: 2px solid #efefec;
+    font-weight: bold;
+    padding-bottom: .5rem;
   }
 }
 
 .row {
   display: flex;
+  font: .8rem/2.5rem $sans;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 1rem auto;
   width: 85%;
 }
 .col {
   color: #575e64;
-  height: 3.5rem;
-  font: bold .75rem/3.5rem $sans;
+  border-radius: 50%;
+  background: #fff;
+  height: 2.5rem;
+  position: relative;
   text-align: center;
   text-transform: uppercase;
-  width: 4.5rem;
+  transition: all .3s;
+  width: 2.5rem;
+    &.selected {
+      box-shadow: 0 0 10px 0 #e75a47;
+      color: #fff;
+      background: #e75a47;
+      font-weight: bold;
+    }
+    &.contain {
+      cursor: pointer;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+    &.contain::before {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #e8aa2e;
+      border-radius: 50%;
+      content: '';
+      display: block;
+      height: .3rem;
+      margin: 0 auto;
+      width: .3rem;
+    }
+    &.contain.done::before {
+      background: #2dbd9b;
+    }
+    &.selected.contain::before {
+      display: none;
+    }
 }
 
 .calendar__prev {
@@ -230,6 +271,122 @@ header {
   height: 1.45rem;
   margin-top: -.75rem;
   width: .9rem;
+}
+
+.calendar-count {
+  border-top: 2px solid #eaeae6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 6.5% auto 0;
+  padding-top: 6.5%;
+  width: 85%;
+}
+
+.count-list {
+  flex: 1 0 auto;
+}
+
+.count-list__item {
+  display: inline-block;
+  font: 1.2rem/1.4 $sans;
+  position: relative;
+    span {
+      display: block;
+      font-size: 2em;
+      font-weight: 300;
+    }
+    &.done {
+      color: #2dbd9b;
+    }
+    &.undone {
+      color: #e75a47;
+    }
+    &.all {
+      color: #8c9094;
+    }
+}
+
+.count-list__item + .count-list__item {
+  margin-left: 10%;
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: -2rem;
+      background: #d6d6ce;
+      border-radius: 50%;
+      content: '';
+      height: .4rem;
+      width: .4rem;
+    }
+}
+
+.add_note {
+  background: #2dbd9b;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 2.5rem;
+  position: relative;
+  transition: all .3s;
+  width: 2.5rem;
+    &::before {
+      color: #fff;
+      content: '+';
+      display: block;
+      font: bold 2rem/2.4rem $sans;
+      text-align: center;
+    }
+    &:hover {
+      box-shadow: 0 0 10px 0 #2dbd9b;
+      transform: rotate(-90deg);
+    }
+}
+
+.calendar-notes {
+  color: #fff;
+  font-family: $sans;
+    p {
+      margin: 0;
+      padding: 0;
+    }
+}
+
+.calendar-notes__date {
+  margin: 27% 0 0 25%;
+}
+
+.date-title {
+  font-size: 1rem;
+  font-weight: 300;
+}
+.date-subtitle {
+  font-size: 2rem;
+  line-height: .8;
+}
+
+.notes-list {
+  border-left: 2px solid rgba(255,255,255,.5);
+  margin: 15% 0 0 12.5%;
+  padding-left: 12.5%;
+}
+
+.notes-list__item {
+  font-weight: 300;
+  position: relative;
+    span {
+      position: absolute;
+      top: 0;
+      left: -4.4rem;
+      background: #e8aa2e;
+      border-radius: .5em;
+      display: inline-block;
+      font-size: .75rem;
+      padding: .3em .5em;
+    }
+}
+.notes-list__item + .notes-list__item {
+  margin-top: 7.5%;
 }
 /* ==========================================================================
    Helper classes
