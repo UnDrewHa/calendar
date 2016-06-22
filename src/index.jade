@@ -13,6 +13,22 @@ html
   body
     .container
       .calendar
+        .new-note.hidden
+          .new-note__inner
+            .new-note__close ✕
+            h3 Новая заметка:
+            .new-note__group
+              label(for='note-title') Название:
+              input(id='note-title' type='text')
+            .new-note__group
+              label(for='note-date') Дата:
+              input(id='note-date' type='text')
+            .new-note__group
+              label(for='note-time') Время:
+              input(id='note-time' type='text')
+            .new-note__group
+              button Сохранить
+
         .calendar-block
           header
             h2.calendar-main__title Январь 2016
@@ -39,7 +55,7 @@ html
                 .col 3
                 .col 4
               .row
-                .col.contain.done 5
+                .col.contain 5
                 .col 6
                 .col 7
                 .col 8
@@ -49,7 +65,7 @@ html
               .row
                 .col 12
                 .col 13
-                .col.contain.done 14
+                .col.contain 14
                 .col 15
                 .col 16
                 .col.selected.contain 17
@@ -67,7 +83,7 @@ html
                 .col 27
                 .col 28
                 .col 29
-                .col.contain.done 30
+                .col.contain 30
                 .col.contain 31
                 .col.unactive 1
 
@@ -81,13 +97,45 @@ html
             .add_note
         .calendar-notes
           .calendar-notes__date
-            p.date-title 17 Январь
+            p.date-title 17 Января
             p.date-subtitle Воскресенье
           ul.notes-list
-            li.notes-list__item <span>15:00</span> Design personal calendar
-            li.notes-list__item <span>18:00</span> Take volvo and go for a ride
-            li.notes-list__item <span>20:30</span> Search for a job
-            li.notes-list__item <span>21:45</span> Go with the dog for a walk
-            li.notes-list__item <span>20:30</span> Search for a job
-            li.notes-list__item <span>15:00</span> Design personal calendar
+            li.notes-list__item
+              span.item__date 20:30
+              span.item__title Take Volvo and go for a ride
+              .helpers-buttons
+                input(type='checkbox').toggle
+                button.destroy-btn ✕
+            li.notes-list__item
+              span.item__date 20:30
+              span.item__title Take Volvo and go for a ride
+              .helpers-buttons
+                input(type='checkbox').toggle
+                button.destroy-btn ✕
+            li.notes-list__item
+              span.item__date 20:30
+              span.item__title Take Volvo and go for a ride
+              .helpers-buttons
+                input(type='checkbox').toggle
+                button.destroy-btn ✕
+            li.notes-list__item
+              span.item__date 20:30
+              span.item__title Take Volvo and go for a ride
+              .helpers-buttons
+                input(type='checkbox').toggle
+                button.destroy-btn ✕
+            li.notes-list__item.completed
+              span.item__date 20:30
+              span.item__title Take Volvo and go for a ride
+              .helpers-buttons
+                input(type='checkbox').toggle
+                button.destroy-btn ✕
+            li.notes-list__item
+              span.item__date 20:30
+              span.item__title Take Volvo and go for a ride
+              .helpers-buttons
+                input(type='checkbox').toggle
+                button.destroy-btn ✕
+          footer
+            p.delete-comp Удалить завершенные
     script(src='_js/main.js')

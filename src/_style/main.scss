@@ -130,6 +130,81 @@ ul {
   max-width: 1400px;
 }
 
+.new-note {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0, .4);
+  z-index: 200;
+}
+.new-note__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
+  margin: -150px 0 0 -250px;
+  padding: 10px 20px 40px;
+  width: 500px;
+    h3 {
+      color: #8c9094;
+      font: 300 1.25rem/1 $sans;
+      margin: 1em 0 0;
+    }
+  .new-note__group {
+    border-top: 1px solid #f6f6f6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em 0 0;
+    padding: 1em 0 0;
+      &:last-child {
+        display: block;
+        text-align: right;
+      }
+  }
+  label {
+    color: #8c9094;
+    font: 1rem/1 $sans;
+  }
+  input {
+    font: 300 .8rem $sans;
+    padding: 1% 2%;
+  }
+  button {
+    background: #26a69a;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    color: #fff;
+    font: .9rem $sans;
+    outline: none;
+    letter-spacing: .5px;
+    margin: 0;
+    padding: .25em .75em;
+    text-transform: uppercase;
+    transition: all .3s;
+      &:hover {
+        background: #2bbbad;
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+      }
+
+  }
+}
+
+.new-note__close {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  color: #e75a47;
+  cursor: pointer;
+}
+
+
+
+
 .calendar-block {
   background: #fff;
   height: 100%;
@@ -153,7 +228,7 @@ header {
   display: flex;
   justify-content: space-between;
   height: 6rem;
-  padding: 0 5.49%;
+  padding: 0 6.5% 0 7.3%;
   position: relative;
 }
 
@@ -225,9 +300,9 @@ header {
     font-weight: bold;
   }
     &.selected {
-      box-shadow: 0 0 10px 0 #e75a47;
+      box-shadow: 0 0 10px 0 #4267b5;
       color: #fff;
-      background: #e75a47;
+      background: #4267b5;
       font-weight: bold;
     }
     &.contain {
@@ -306,7 +381,7 @@ header {
       color: #2dbd9b;
     }
     &.undone {
-      color: #e75a47;
+      color: #e8aa2e;
     }
     &.all {
       color: #8c9094;
@@ -339,7 +414,7 @@ header {
       color: #fff;
       content: '+';
       display: block;
-      font: bold 2rem/2.4rem $sans;
+      font: 2rem/2.4rem $sans;
       text-align: center;
     }
     &:hover {
@@ -351,10 +426,21 @@ header {
 .calendar-notes {
   color: #fff;
   font-family: $sans;
+  padding: 0;
     p {
       margin: 0;
-      padding: 0;
     }
+    footer {
+      display: none;
+      margin-top: 5%;
+    }
+}
+
+.delete-comp {
+  cursor: pointer;
+  font: .7rem $sans;
+  padding: 0 10%;
+  text-align: right;
 }
 
 .calendar-notes__date {
@@ -374,12 +460,13 @@ header {
   border-left: 2px solid rgba(255,255,255,.5);
   margin: 15% 0 0 12.5%;
   padding-left: 12.5%;
+  position: relative;
 }
 
 .notes-list__item {
   font-weight: 300;
   position: relative;
-    span {
+    .item__date {
       position: absolute;
       top: 0;
       left: -4.4rem;
@@ -388,6 +475,73 @@ header {
       display: inline-block;
       font-size: .75rem;
       padding: .3em .5em;
+      transition: all .3s;
+    }
+  
+    .item__title {
+      display: inline-block;
+      max-width: 70%;
+      transition: all .3s;
+      vertical-align: middle;
+    }
+
+    &.completed {
+      .item__date {
+        background: #2dbd9b;
+      }
+      .item__title {
+        opacity: .3;
+        text-decoration: line-through;
+      }
+    }
+
+    &:hover {
+      .helpers-buttons {
+        opacity: 1;
+      }
+    }
+}
+input, button {
+  outline: none;
+}
+.helpers-buttons {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  opacity: 0;
+  transition: all .3s;
+  transform: translateY(-50%);
+    input, button {
+      cursor: pointer;
+      outline: none;
+    }
+}
+.toggle {
+  vertical-align: middle;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.toggle:after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
+}
+
+.toggle:checked:after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
+}
+
+.destroy-btn {
+  vertical-align: middle;
+  background: transparent;
+  border: none;
+  color: #e8aa2e;
+  transition: all .3s;
+    &:hover, &:active {
+      color: #e75a47;
     }
 }
 .notes-list__item + .notes-list__item {

@@ -12,6 +12,27 @@
   <body>
     <div class="container">
       <div class="calendar">
+        <div class="new-note hidden">
+          <div class="new-note__inner">
+            <div class="new-note__close">✕</div>
+            <h3>Новая заметка:</h3>
+            <div class="new-note__group">
+              <label for="note-title">Название:</label>
+              <input id="note-title" type="text">
+            </div>
+            <div class="new-note__group">
+              <label for="note-date">Дата:</label>
+              <input id="note-date" type="text">
+            </div>
+            <div class="new-note__group">
+              <label for="note-time">Время:</label>
+              <input id="note-time" type="text">
+            </div>
+            <div class="new-note__group">
+              <button>Сохранить</button>
+            </div>
+          </div>
+        </div>
         <div class="calendar-block">
           <header>
             <h2 class="calendar-main__title">Январь 2016</h2>
@@ -42,7 +63,7 @@
                 <div class="col">4</div>
               </div>
               <div class="row">
-                <div class="col contain done">5</div>
+                <div class="col contain">5</div>
                 <div class="col">6</div>
                 <div class="col">7</div>
                 <div class="col">8</div>
@@ -53,7 +74,7 @@
               <div class="row">
                 <div class="col">12</div>
                 <div class="col">13</div>
-                <div class="col contain done">14</div>
+                <div class="col contain">14</div>
                 <div class="col">15</div>
                 <div class="col">16</div>
                 <div class="col selected contain">17</div>
@@ -73,7 +94,7 @@
                 <div class="col">27</div>
                 <div class="col">28</div>
                 <div class="col">29</div>
-                <div class="col contain done">30</div>
+                <div class="col contain">30</div>
                 <div class="col contain">31</div>
                 <div class="col unactive">1</div>
               </div>
@@ -92,17 +113,50 @@
         </div>
         <div class="calendar-notes">
           <div class="calendar-notes__date">
-            <p class="date-title">17 Январь</p>
+            <p class="date-title">17 Января</p>
             <p class="date-subtitle">Воскресенье</p>
           </div>
           <ul class="notes-list">
-            <li class="notes-list__item"><span>15:00</span> Design personal calendar</li>
-            <li class="notes-list__item"><span>18:00</span> Take volvo and go for a ride</li>
-            <li class="notes-list__item"><span>20:30</span> Search for a job</li>
-            <li class="notes-list__item"><span>21:45</span> Go with the dog for a walk</li>
-            <li class="notes-list__item"><span>20:30</span> Search for a job</li>
-            <li class="notes-list__item"><span>15:00</span> Design personal calendar</li>
+            <li class="notes-list__item"><span class="item__date">20:30</span><span class="item__title">Take Volvo and go for a ride</span>
+              <div class="helpers-buttons">
+                <input type="checkbox" class="toggle">
+                <button class="destroy-btn">✕</button>
+              </div>
+            </li>
+            <li class="notes-list__item"><span class="item__date">20:30</span><span class="item__title">Take Volvo and go for a ride</span>
+              <div class="helpers-buttons">
+                <input type="checkbox" class="toggle">
+                <button class="destroy-btn">✕</button>
+              </div>
+            </li>
+            <li class="notes-list__item"><span class="item__date">20:30</span><span class="item__title">Take Volvo and go for a ride</span>
+              <div class="helpers-buttons">
+                <input type="checkbox" class="toggle">
+                <button class="destroy-btn">✕</button>
+              </div>
+            </li>
+            <li class="notes-list__item"><span class="item__date">20:30</span><span class="item__title">Take Volvo and go for a ride</span>
+              <div class="helpers-buttons">
+                <input type="checkbox" class="toggle">
+                <button class="destroy-btn">✕</button>
+              </div>
+            </li>
+            <li class="notes-list__item completed"><span class="item__date">20:30</span><span class="item__title">Take Volvo and go for a ride</span>
+              <div class="helpers-buttons">
+                <input type="checkbox" class="toggle">
+                <button class="destroy-btn">✕</button>
+              </div>
+            </li>
+            <li class="notes-list__item"><span class="item__date">20:30</span><span class="item__title">Take Volvo and go for a ride</span>
+              <div class="helpers-buttons">
+                <input type="checkbox" class="toggle">
+                <button class="destroy-btn">✕</button>
+              </div>
+            </li>
           </ul>
+          <footer>
+            <p class="delete-comp">Удалить завершенные</p>
+          </footer>
         </div>
       </div>
     </div>
