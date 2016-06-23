@@ -309,11 +309,21 @@
   }
 
   View.prototype._removeItem = function(id) {
+    var element = qs('[data-id="' + id + '"]');
 
+    if (element) {
+      this.$noteList.removeChild(element);
+    }
   };
 
   View.prototype._elementComplete = function(id, completed) {
+    var element = qs('[data-id="' + id + '"]');
 
+    if (!element) {
+      return;
+    }
+    element.className += completed ? 'completed' : '';
+    qs('input', element).checked = completed;
   };
 
   View.prototype._editItem = function(id, title, date) {
@@ -325,11 +335,11 @@
   };
 
   View.prototype._showNewNote = function() {
-
+    this.$newNoteBlock.classList.add("hidden");
   };
 
   View.prototype._hideNewNote = function() {
-
+    this.$newNoteBlock.classList.remove("hidden");
   };
 
   View.prototype.render = function(viewCmd, parameter) {
@@ -385,6 +395,12 @@
 }(window));
 (function(window) {
   "use strict";
+
+  function Controller(model, view) {
+    var self = this;
+    self.model = model;
+    self.view = view;
+  }
 }(window));
 
 (function () {
