@@ -11,31 +11,31 @@
   </head>
   <body>
     <div class="container">
-      <div class="calendar">
-        <div class="new-note hidden">
-          <div class="new-note__inner">
-            <div class="new-note__close">✕</div>
-            <h3>Новая заметка:</h3>
-            <div class="new-note__group">
-              <label for="note-title">Название:</label>
-              <input id="note-title" type="text">
-            </div>
-            <div class="new-note__group">
-              <label for="note-date">Дата:</label>
-              <input id="note-date" type="text">
-            </div>
-            <div class="new-note__group">
-              <label for="note-time">Время:</label>
-              <input id="note-time" type="text">
-            </div>
-            <div class="new-note__group">
-              <button class="add-note">Сохранить</button>
-            </div>
+      <div class="new-note hidden">
+        <div class="new-note__inner">
+          <div class="new-note__close">✕</div>
+          <h3>Новая заметка:</h3>
+          <div class="new-note__group">
+            <label for="note-title">Название:</label>
+            <input id="note-title" type="text">
+          </div>
+          <div class="new-note__group">
+            <label for="note-date">Дата:</label>
+            <input id="note-date" type="text">
+          </div>
+          <div class="new-note__group">
+            <label for="note-time">Время:</label>
+            <input id="note-time" type="text">
+          </div>
+          <div class="new-note__group">
+            <button class="add-note">Сохранить</button>
           </div>
         </div>
+      </div>
+      <div class="calendar">
         <div class="calendar-block">
           <header>
-            <h2 class="calendar-main__title">Январь 2016</h2>
+            <h2 class="calendar-main__title"></h2>
             <ul class="calendar-main__nav">
               <li>Сегодня</li>
               <li class="active">Месяц</li>
@@ -43,75 +43,19 @@
             </ul>
           </header>
           <div class="calendar-main">
-            <div class="calendar__wrap">
-              <div class="row">
-                <div class="col">Пн</div>
-                <div class="col">Вт</div>
-                <div class="col">Ср</div>
-                <div class="col">Чт</div>
-                <div class="col">Пт</div>
-                <div class="col">Сб</div>
-                <div class="col">Вс</div>
-              </div>
-              <div class="row">
-                <div class="col unactive">29</div>
-                <div class="col unactive">30</div>
-                <div class="col unactive">31</div>
-                <div class="col">1</div>
-                <div class="col">2</div>
-                <div class="col">3</div>
-                <div class="col">4</div>
-              </div>
-              <div class="row">
-                <div class="col contain">5</div>
-                <div class="col">6</div>
-                <div class="col">7</div>
-                <div class="col">8</div>
-                <div class="col">9</div>
-                <div class="col">10</div>
-                <div class="col">11</div>
-              </div>
-              <div class="row">
-                <div class="col">12</div>
-                <div class="col">13</div>
-                <div class="col contain">14</div>
-                <div class="col">15</div>
-                <div class="col">16</div>
-                <div class="col selected contain">17</div>
-                <div class="col">18</div>
-              </div>
-              <div class="row">
-                <div class="col">19</div>
-                <div class="col">20</div>
-                <div class="col">21</div>
-                <div class="col contain">22</div>
-                <div class="col">23</div>
-                <div class="col">24</div>
-                <div class="col">25</div>
-              </div>
-              <div class="row">
-                <div class="col">26</div>
-                <div class="col">27</div>
-                <div class="col">28</div>
-                <div class="col">29</div>
-                <div class="col contain">30</div>
-                <div class="col contain">31</div>
-                <div class="col unactive">1</div>
-              </div>
-            </div>
             <div class="calendar__prev"></div>
             <div class="calendar__next"></div>
           </div>
           <div class="calendar-count">
             <ul class="count-list">
-              <li class="count-list__item done">Завершенные <span>48</span></li>
-              <li class="count-list__item undone">Незавершенные <span>12</span></li>
-              <li class="count-list__item all">Все задачи <span>60</span></li>
+              <li class="count-list__item done"></li>
+              <li class="count-list__item undone"></li>
+              <li class="count-list__item all"></li>
             </ul>
             <div class="add_note"></div>
           </div>
         </div>
-        <div class="calendar-notes">
+        <div class="calendar-notes hidden">
           <div class="calendar-notes__date">
             <p class="date-title">17 Января</p>
             <p class="date-subtitle">Воскресенье</p>

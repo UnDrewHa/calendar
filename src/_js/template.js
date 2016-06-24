@@ -30,24 +30,26 @@
     return timeStr;
   };
 
-  function Template() {
-    this.noteTemplate
-      = "<li data-id='{{id}}' class='notes-list__item {{completed}}'>"
-      +   "<span class='item__date'>{{time}}</span>"
-      +   "<span class='item__title'>{{title}}</span>"
-      +   "<div class='helpers-buttons'>"
-      +     "<input type='checkbox' class='toggle' {{checked}}>"
-      +     "<button class='destroy-btn'>✕</button>"
-      +   "</div>"
-      + "</li>";
+    function Template() {
+      this.month = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      this.day = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      this.noteTemplate
+        = "<li data-id='{{id}}' class='notes-list__item {{completed}}'>"
+        +   "<span class='item__date'>{{hours}}:{{minutes}}</span>"
+        +   "<span class='item__title'>{{title}}</span>"
+        +   "<div class='helpers-buttons'>"
+        +     "<input type='checkbox' class='toggle' {{checked}}>"
+        +     "<button class='destroy-btn'>✕</button>"
+        +   "</div>"
+        + "</li>";
 
-    this.countTemplate
-      = "<li class='count-list__item done'>Завершенные <span>{{completed}}</span></li>"
-      + "<li class='count-list__item undone'>Незавершенные <span>{{active}}</span></li>"
-      + "<li class='count-list__item all'>Все задачи <span>{{total}}</span></li>";
+      this.countTemplate
+        = "<li class='count-list__item done'>Завершенные <span>{{completed}}</span></li>"
+        + "<li class='count-list__item undone'>Незавершенные <span>{{active}}</span></li>"
+        + "<li class='count-list__item all'>Все задачи <span>{{total}}</span></li>";
   }
 
-  Template.prototype.show = function(data) {
+  Template.prototype.showNotes = function(data) {
     var view = '';
 
     for (var i = 0; i < data.length; i++) {
@@ -62,7 +64,8 @@
 
       template = template.replace('{{id}}', data[i].id);
       template = template.replace('{{completed}}', completed);
-      template = template.replace('{{time}}', getTime(data[i].date));
+      template = template.replace('{{hours}}', data[i].hours);
+      template = template.replace('{{minutes}}', data[i].minutes);
       template = template.replace('{{title}}', escape(data[i].title));
       template = template.replace('{{checked}}', checked);
 
@@ -73,13 +76,18 @@
   };
 
   Template.prototype.showCounter = function(counts) {
-    var countView = this.noteTemplate;
+    var countView = this.countTemplate;
 
     countView = countView.replace('{{completed}}', counts.completed);
     countView = countView.replace('{{active}}', counts.active);
     countView = countView.replace('{{total}}', counts.total);
 
     return countView;
+  };
+
+  Template.prototype.showMonth = function(m, year) {
+    m = parseInt(m, 10);
+    return this.month[m] + ' ' + year;
   };
 
   window.app = window.app || {};

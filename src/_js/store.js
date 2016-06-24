@@ -8,7 +8,53 @@
 
       if (!localStorage[name]) {
         var data = {
-          notes: []
+          notes: [
+            { id: 1238,
+              title: 'Main note',
+              year: 2016,
+              month: 5,
+              day: 13,
+              hours: 15,
+              minutes: 30,
+              completed: 0
+            },
+            { id: 7865,
+              title: 'Another test note',
+              year: 2016,
+              month: 5,
+              day: 20,
+              hours: 10,
+              minutes: 45,
+              completed: 1
+            },
+            { id: 7865,
+              title: 'Test note',
+              year: 2016,
+              month: 5,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 1
+            },
+            { id: 7865,
+              title: 'Test note',
+              year: 2016,
+              month: 6,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 0
+            },
+            { id: 7865,
+              title: 'Test note',
+              year: 2016,
+              month: 6,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 1
+            }
+          ]
         };
 
         localStorage[name] = JSON.stringify(data);

@@ -7,6 +7,9 @@
     this.ENTER_KEY = 13;
     this.ESCAPE_KEY = 27;
 
+    this.$calendar = qs('.calendar-main');
+    this.$calendarDay = qs('.calendar-notes');
+    this.$calendarTitle = qs('.calendar-main__title');
     this.$noteList = qs('.notes-list');
     this.$countList = qs('.count-list');
     this.$newNoteBlock = qs('.new-note');
@@ -50,30 +53,93 @@
     this.$newNoteBlock.classList.remove("hidden");
   };
 
+  View.prototype._getDay = function(date) {
+    var day = date.getDay();
+    if (day === 0) day = 7;
+    return day - 1;
+  };
+
   View.prototype.render = function(viewCmd, parameter) {
     var self = this;
     var viewCommands = {
       showCalendar: function() {
+        var mon = parameter.month,
+            year = parameter.year,
+            d = new Date(year, mon);
+
+        var table
+          = "<div class='calendar__wrap'>"
+          +   "<div class='row'>"
+          +     "<div class='col'>Пн</div>"
+        +     "<div class='col'>Вт</div>"
+        +     "<div class='col'>Ср</div>"
+        +     "<div class='col'>Чт</div>"
+        +     "<div class='col'>Пт</div>"
+        +     "<div class='col'>Сб</div>"
+        +     "<div class='col'>Вс</div>"
+        +   "</div>"
+        +   "<div class='row'>";
+
+
+        var num = self._getDay(d);
+        if (num != 0) {
+          d.setDate(d.getDate() - self._getDay(d));
+        }
+        for (var i = 0; i < num; i++) {
+          table += "<div class='col unactive' data-date='" + d.getFullYear() + d.getMonth() + d.getDate() + "'>" + d.getDate() + "</div>";
+          d.setDate(d.getDate() + 1);
+        }
+
+        while (d.getMonth() == mon) {
+          table += "<div class='col' data-date='" + d.getFullYear() + d.getMonth() + d.getDate() + "'>" + d.getDate() + "</div>";
+
+          if (self._getDay(d) % 7 == 6) {
+            table += "</div><div class='row'>";
+          }
+
+          d.setDate(d.getDate() + 1);
+        }
+        if (self._getDay(d) != 0) {
+          for (var k = self._getDay(d); k < 7; k++) {
+            table += "<div class='col unactive'  data-date='" + d.getFullYear() + d.getMonth() + d.getDate() + "'>" + d.getDate() + "</div>";
+            d.setDate(d.getDate() + 1);
+          }
+        }
+        table += "</div></div>";
+        self.$calendarTitle.innerHTML = self.template.showMonth(mon, year);
+        self.$calendar.innerHTML += table;
 
       },
-      showCalendarEntries: function() {
 
+      showEntries: function() {
+        for (var i = 0; i < parameter.length; i++) {
+          var date = "";
+          date = String(parameter[i].year) + String(parameter[i].month) + String(parameter[i].day);
+          var $col = qs('[data-date="' + date + '"]');;
+          $col.className += ' contain';
+        }
       },
+
       showDayNotes: function() {
-
+        self.$noteList.innerHTML = self.template.showNotes(parameter);
       },
+
       showSelectedDay: function() {
-
+        self.$calendarDay.classList.remove('hidden');
       },
+
       updateCount: function() {
-
+        self.$countList.innerHTML = self.template.showCounter(parameter);
       },
+
       removeItem: function() {
-
+        self._removeItem(parameter);
       },
+
       editItem: function() {
 
       },
+
       editItemDone: function() {
 
       }

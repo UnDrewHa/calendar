@@ -50,7 +50,53 @@
 
       if (!localStorage[name]) {
         var data = {
-          notes: []
+          notes: [
+            { id: 1238,
+              title: 'Main note',
+              year: 2016,
+              month: 5,
+              day: 13,
+              hours: 15,
+              minutes: 30,
+              completed: 0
+            },
+            { id: 7865,
+              title: 'Another test note',
+              year: 2016,
+              month: 5,
+              day: 20,
+              hours: 10,
+              minutes: 45,
+              completed: 1
+            },
+            { id: 7865,
+              title: 'Test note',
+              year: 2016,
+              month: 5,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 1
+            },
+            { id: 7865,
+              title: 'Test note',
+              year: 2016,
+              month: 6,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 0
+            },
+            { id: 7865,
+              title: 'Test note',
+              year: 2016,
+              month: 6,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 1
+            }
+          ]
         };
 
         localStorage[name] = JSON.stringify(data);
@@ -141,10 +187,14 @@
     this.storage = storage;
   }
 
-  Model.prototype.create = function(title, date, callback) {
+  Model.prototype.create = function(title, year, month, day, hours, minutes, callback) {
     var data = {
       title: title.trim(),
-      date: date,
+      year: year,
+      month: month,
+      day: day,
+      hours: hours,
+      minutes: minutes,
       completed: false
     };
 
@@ -235,24 +285,26 @@
     return timeStr;
   };
 
-  function Template() {
-    this.noteTemplate
-      = "<li data-id='{{id}}' class='notes-list__item {{completed}}'>"
-      +   "<span class='item__date'>{{time}}</span>"
-      +   "<span class='item__title'>{{title}}</span>"
-      +   "<div class='helpers-buttons'>"
-      +     "<input type='checkbox' class='toggle' {{checked}}>"
-      +     "<button class='destroy-btn'>✕</button>"
-      +   "</div>"
-      + "</li>";
+    function Template() {
+      this.month = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      this.day = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      this.noteTemplate
+        = "<li data-id='{{id}}' class='notes-list__item {{completed}}'>"
+        +   "<span class='item__date'>{{hours}}:{{minutes}}</span>"
+        +   "<span class='item__title'>{{title}}</span>"
+        +   "<div class='helpers-buttons'>"
+        +     "<input type='checkbox' class='toggle' {{checked}}>"
+        +     "<button class='destroy-btn'>✕</button>"
+        +   "</div>"
+        + "</li>";
 
-    this.countTemplate
-      = "<li class='count-list__item done'>Завершенные <span>{{completed}}</span></li>"
-      + "<li class='count-list__item undone'>Незавершенные <span>{{active}}</span></li>"
-      + "<li class='count-list__item all'>Все задачи <span>{{total}}</span></li>";
+      this.countTemplate
+        = "<li class='count-list__item done'>Завершенные <span>{{completed}}</span></li>"
+        + "<li class='count-list__item undone'>Незавершенные <span>{{active}}</span></li>"
+        + "<li class='count-list__item all'>Все задачи <span>{{total}}</span></li>";
   }
 
-  Template.prototype.show = function(data) {
+  Template.prototype.showNotes = function(data) {
     var view = '';
 
     for (var i = 0; i < data.length; i++) {
@@ -267,7 +319,8 @@
 
       template = template.replace('{{id}}', data[i].id);
       template = template.replace('{{completed}}', completed);
-      template = template.replace('{{time}}', getTime(data[i].date));
+      template = template.replace('{{hours}}', data[i].hours);
+      template = template.replace('{{minutes}}', data[i].minutes);
       template = template.replace('{{title}}', escape(data[i].title));
       template = template.replace('{{checked}}', checked);
 
@@ -278,13 +331,18 @@
   };
 
   Template.prototype.showCounter = function(counts) {
-    var countView = this.noteTemplate;
+    var countView = this.countTemplate;
 
     countView = countView.replace('{{completed}}', counts.completed);
     countView = countView.replace('{{active}}', counts.active);
     countView = countView.replace('{{total}}', counts.total);
 
     return countView;
+  };
+
+  Template.prototype.showMonth = function(m, year) {
+    m = parseInt(m, 10);
+    return this.month[m] + ' ' + year;
   };
 
   window.app = window.app || {};
@@ -299,6 +357,9 @@
     this.ENTER_KEY = 13;
     this.ESCAPE_KEY = 27;
 
+    this.$calendar = qs('.calendar-main');
+    this.$calendarDay = qs('.calendar-notes');
+    this.$calendarTitle = qs('.calendar-main__title');
     this.$noteList = qs('.notes-list');
     this.$countList = qs('.count-list');
     this.$newNoteBlock = qs('.new-note');
@@ -342,30 +403,93 @@
     this.$newNoteBlock.classList.remove("hidden");
   };
 
+  View.prototype._getDay = function(date) {
+    var day = date.getDay();
+    if (day === 0) day = 7;
+    return day - 1;
+  };
+
   View.prototype.render = function(viewCmd, parameter) {
     var self = this;
     var viewCommands = {
       showCalendar: function() {
+        var mon = parameter.month,
+            year = parameter.year,
+            d = new Date(year, mon);
+
+        var table
+          = "<div class='calendar__wrap'>"
+          +   "<div class='row'>"
+          +     "<div class='col'>Пн</div>"
+        +     "<div class='col'>Вт</div>"
+        +     "<div class='col'>Ср</div>"
+        +     "<div class='col'>Чт</div>"
+        +     "<div class='col'>Пт</div>"
+        +     "<div class='col'>Сб</div>"
+        +     "<div class='col'>Вс</div>"
+        +   "</div>"
+        +   "<div class='row'>";
+
+
+        var num = self._getDay(d);
+        if (num != 0) {
+          d.setDate(d.getDate() - self._getDay(d));
+        }
+        for (var i = 0; i < num; i++) {
+          table += "<div class='col unactive' data-date='" + d.getFullYear() + d.getMonth() + d.getDate() + "'>" + d.getDate() + "</div>";
+          d.setDate(d.getDate() + 1);
+        }
+
+        while (d.getMonth() == mon) {
+          table += "<div class='col' data-date='" + d.getFullYear() + d.getMonth() + d.getDate() + "'>" + d.getDate() + "</div>";
+
+          if (self._getDay(d) % 7 == 6) {
+            table += "</div><div class='row'>";
+          }
+
+          d.setDate(d.getDate() + 1);
+        }
+        if (self._getDay(d) != 0) {
+          for (var k = self._getDay(d); k < 7; k++) {
+            table += "<div class='col unactive'  data-date='" + d.getFullYear() + d.getMonth() + d.getDate() + "'>" + d.getDate() + "</div>";
+            d.setDate(d.getDate() + 1);
+          }
+        }
+        table += "</div></div>";
+        self.$calendarTitle.innerHTML = self.template.showMonth(mon, year);
+        self.$calendar.innerHTML += table;
 
       },
-      showCalendarEntries: function() {
 
+      showEntries: function() {
+        for (var i = 0; i < parameter.length; i++) {
+          var date = "";
+          date = String(parameter[i].year) + String(parameter[i].month) + String(parameter[i].day);
+          var $col = qs('[data-date="' + date + '"]');;
+          $col.className += ' contain';
+        }
       },
+
       showDayNotes: function() {
-
+        self.$noteList.innerHTML = self.template.showNotes(parameter);
       },
+
       showSelectedDay: function() {
-
+        self.$calendarDay.classList.remove('hidden');
       },
+
       updateCount: function() {
-
+        self.$countList.innerHTML = self.template.showCounter(parameter);
       },
+
       removeItem: function() {
-
+        self._removeItem(parameter);
       },
+
       editItem: function() {
 
       },
+
       editItemDone: function() {
 
       }
@@ -400,9 +524,39 @@
     var self = this;
     self.model = model;
     self.view = view;
+    this._date = new Date();
   }
+
+  Controller.prototype.startView = function() {
+    var self = this;
+
+    self.view.render('showCalendar', {year: this._date.getFullYear(), month: this._date.getMonth()});
+    self.model.getCount(function(notes) {
+      self.view.render('updateCount', notes);
+    });
+    self.model.find({year: this._date.getFullYear(), month: this._date.getMonth()}, function(dots) {
+      self.view.render('showEntries', dots);
+    });
+  };
+
+  window.app = window.app || {};
+  window.app.Controller = Controller;
 }(window));
 
 (function () {
+  function Calendar(name) {
+    this.storage = new app.Store(name);
+    this.model = new app.Model(this.storage);
+    this.template = new app.Template();
+    this.view = new app.View(this.template);
+    this.controller = new app.Controller(this.model, this.view);
+  }
+  
+  var calendar = new Calendar('new-calendar');
+  
+  function setView() {
+    calendar.controller.startView();
+  }
 
+  $on(window, 'load', setView);
 }());

@@ -5,10 +5,14 @@
     this.storage = storage;
   }
 
-  Model.prototype.create = function(title, date, callback) {
+  Model.prototype.create = function(title, year, month, day, hours, minutes, callback) {
     var data = {
       title: title.trim(),
-      date: date,
+      year: year,
+      month: month,
+      day: day,
+      hours: hours,
+      minutes: minutes,
       completed: false
     };
 

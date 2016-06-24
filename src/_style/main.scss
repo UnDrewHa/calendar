@@ -121,15 +121,6 @@ ul {
   max-width: 1400px;
 }
 
-.calendar {
-  @include clearfix;
-  box-shadow: 0 0 50px 0 rgba(0,0,0, .5);
-  height: 90%;
-  flex: 1 0 auto;
-  position: relative;
-  max-width: 1400px;
-}
-
 .new-note {
   position: fixed;
   top: 0;
@@ -193,7 +184,6 @@ ul {
 
   }
 }
-
 .new-note__close {
   position: absolute;
   top: 2%;
@@ -202,13 +192,17 @@ ul {
   cursor: pointer;
 }
 
-
-
+.calendar {
+  display: flex;
+  height: 90%;
+  flex: 1 0 auto;
+  position: relative;
+  max-width: 1400px;
+}
 
 .calendar-block {
   background: #fff;
   height: 100%;
-  float: left;
   margin: 0 auto;
   width: 65%;
 }
@@ -218,7 +212,6 @@ ul {
   background: linear-gradient(to bottom,  #504aa4 0%,#4267b5 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#504aa4', endColorstr='#4267b5',GradientType=0 );
   height: 100%;
-  float: left;
   width: 35%;
 }
 

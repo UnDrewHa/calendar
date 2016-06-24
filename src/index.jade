@@ -12,90 +12,39 @@ html
     link(rel='stylesheet', href='_css/main.css')
   body
     .container
+      .new-note.hidden
+        .new-note__inner
+          .new-note__close ✕
+          h3 Новая заметка:
+          .new-note__group
+            label(for='note-title') Название:
+            input(id='note-title' type='text')
+          .new-note__group
+            label(for='note-date') Дата:
+            input(id='note-date' type='text')
+          .new-note__group
+            label(for='note-time') Время:
+            input(id='note-time' type='text')
+          .new-note__group
+            button.add-note Сохранить
       .calendar
-        .new-note.hidden
-          .new-note__inner
-            .new-note__close ✕
-            h3 Новая заметка:
-            .new-note__group
-              label(for='note-title') Название:
-              input(id='note-title' type='text')
-            .new-note__group
-              label(for='note-date') Дата:
-              input(id='note-date' type='text')
-            .new-note__group
-              label(for='note-time') Время:
-              input(id='note-time' type='text')
-            .new-note__group
-              button.add-note Сохранить
-
         .calendar-block
           header
-            h2.calendar-main__title Январь 2016
+            h2.calendar-main__title
             ul.calendar-main__nav
               li Сегодня
               li.active Месяц
               li Год
           .calendar-main
-            .calendar__wrap
-              .row
-                .col Пн
-                .col Вт
-                .col Ср
-                .col Чт
-                .col Пт
-                .col Сб
-                .col Вс
-              .row
-                .col.unactive 29
-                .col.unactive 30
-                .col.unactive 31
-                .col 1
-                .col 2
-                .col 3
-                .col 4
-              .row
-                .col.contain 5
-                .col 6
-                .col 7
-                .col 8
-                .col 9
-                .col 10
-                .col 11
-              .row
-                .col 12
-                .col 13
-                .col.contain 14
-                .col 15
-                .col 16
-                .col.selected.contain 17
-                .col 18
-              .row
-                .col 19
-                .col 20
-                .col 21
-                .col.contain 22
-                .col 23
-                .col 24
-                .col 25
-              .row
-                .col 26
-                .col 27
-                .col 28
-                .col 29
-                .col.contain 30
-                .col.contain 31
-                .col.unactive 1
-
             .calendar__prev
             .calendar__next
           .calendar-count
             ul.count-list
-              li.count-list__item.done Завершенные <span>48</span>
-              li.count-list__item.undone Незавершенные <span>12</span>
-              li.count-list__item.all Все задачи <span>60</span>
+              li.count-list__item.done
+              li.count-list__item.undone
+              li.count-list__item.all
             .add_note
-        .calendar-notes
+        .calendar-notes.hidden
           .calendar-notes__date
             p.date-title 17 Января
             p.date-subtitle Воскресенье
