@@ -51,7 +51,7 @@
 
   Template.prototype.showNotes = function(data) {
     var view = '';
-
+    console.log(data);
     for (var i = 0; i < data.length; i++) {
       var template = this.noteTemplate;
       var completed = '';
@@ -89,6 +89,12 @@
     m = parseInt(m, 10);
     return this.month[m] + ' ' + year;
   };
+  Template.prototype.showDay = function(day, month, dayName) {
+    var d = parseInt(day, 10);
+    return    "<p class='date-title'>" + d + " " + this.month[month] + "</p>"
+            + "<p class='date-subtitle'>" + this.day[dayName] + "</p>";
+  };
+
 
   window.app = window.app || {};
   window.app.Template = Template;

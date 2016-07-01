@@ -18,6 +18,15 @@
               minutes: 30,
               completed: 0
             },
+            { id: 1248,
+              title: 'Купить порошок',
+              year: 2016,
+              month: 5,
+              day: 13,
+              hours: 15,
+              minutes: 10,
+              completed: 0
+            },
             { id: 7865,
               title: 'Another test note',
               year: 2016,
@@ -27,8 +36,26 @@
               minutes: 45,
               completed: 1
             },
-            { id: 7865,
+            { id: 346,
               title: 'Test note',
+              year: 2016,
+              month: 5,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 0
+            },
+            { id: 897954,
+              title: 'Прочитать книгу',
+              year: 2016,
+              month: 5,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 0
+            },
+            { id: 681,
+              title: 'Купить слона',
               year: 2016,
               month: 5,
               day: 22,
@@ -36,8 +63,36 @@
               minutes: 12,
               completed: 1
             },
-            { id: 7865,
-              title: 'Test note',
+            { id: 991234,
+              title: 'Починить велосипед',
+              year: 2016,
+              month: 5,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 0
+            },
+            { id: 85314,
+              title: 'Сходить в магазин',
+              year: 2016,
+              month: 5,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 0
+            },
+            { id: 77964,
+              title: 'Посмотреть сериал',
+              year: 2016,
+              month: 5,
+              day: 22,
+              hours: 12,
+              minutes: 12,
+              completed: 1
+            },
+
+            { id: 134679,
+              title: 'Съесть торт',
               year: 2016,
               month: 6,
               day: 22,
@@ -45,11 +100,11 @@
               minutes: 12,
               completed: 0
             },
-            { id: 7865,
+            { id: 3467,
               title: 'Test note',
               year: 2016,
               month: 6,
-              day: 22,
+              day: 3,
               hours: 12,
               minutes: 12,
               completed: 1
@@ -86,10 +141,8 @@
 
     Store.prototype.save = function(updateData, callback, id) {
       callback = callback || function() {};
-
       var data = JSON.parse(localStorage[this._dbname]),
           notes = data.notes;
-
       if (id) {
         for (var i = 0; i < notes.length; i++) {
           if (notes[i].id === id) {
@@ -99,7 +152,7 @@
             break;
           }
         }
-        localStorage[this._dbname] = JSON.parse(data);
+        localStorage[this._dbname] = JSON.stringify(data);
         callback.call(this, JSON.parse(localStorage[this._dbname]).notes);
       }
       else {

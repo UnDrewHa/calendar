@@ -120,7 +120,6 @@ ul {
   margin: 0 auto;
   max-width: 1400px;
 }
-
 .new-note {
   position: fixed;
   top: 0;
@@ -128,6 +127,7 @@ ul {
   bottom: 0;
   right: 0;
   background: rgba(0,0,0, .4);
+  opacity: 1;
   z-index: 200;
 }
 .new-note__inner {
@@ -136,8 +136,8 @@ ul {
   left: 50%;
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
-  margin: -150px 0 0 -250px;
   padding: 10px 20px 40px;
+  transform: translate(-50%, -50%);
   width: 500px;
     h3 {
       color: #8c9094;
@@ -151,6 +151,7 @@ ul {
     align-items: center;
     margin: 1em 0 0;
     padding: 1em 0 0;
+    width: 100%;
       &:last-child {
         display: block;
         text-align: right;
@@ -159,9 +160,11 @@ ul {
   label {
     color: #8c9094;
     font: 1rem/1 $sans;
+    flex: 1 0 auto;
   }
   input {
     font: 300 .8rem $sans;
+    flex-shrink: 1;
     padding: 1% 2%;
   }
   button {
@@ -322,7 +325,7 @@ header {
     }
 }
 
-.calendar__prev {
+.prev-btn {
   position: absolute;
   top: 50%;
   left: 0;
@@ -332,9 +335,10 @@ header {
   height: 1.45rem;
   margin-top: -.75rem;
   width: .9rem;
+  z-index: 50;
 }
 
-.calendar__next {
+.next-btn {
   position: absolute;
   top: 50%;
   right: 0;
@@ -344,6 +348,7 @@ header {
   height: 1.45rem;
   margin-top: -.75rem;
   width: .9rem;
+  z-index: 50;
 }
 
 .calendar-count {

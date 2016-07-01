@@ -18,13 +18,20 @@ html
           h3 Новая заметка:
           .new-note__group
             label(for='note-title') Название:
-            input(id='note-title' type='text')
+            input(id='note-title' type='text' placeholder='Заметка')
           .new-note__group
-            label(for='note-date') Дата:
-            input(id='note-date' type='text')
+            label(for='date-y') Год:
+            input(id='date-y' type='text' placeholder='2015')
+          .new-note__group
+            label(for='date-m') Месяц:
+            input(id='date-m' type='text' placeholder='9')
+          .new-note__group
+            label(for='date-d') День:
+            input(id='date-d' type='text' placeholder='23')
+
           .new-note__group
             label(for='note-time') Время:
-            input(id='note-time' type='text')
+            input(id='note-time' type='text' placeholder='15:20')
           .new-note__group
             button.add-note Сохранить
       .calendar
@@ -36,8 +43,8 @@ html
               li.active Месяц
               li Год
           .calendar-main
-            .calendar__prev
-            .calendar__next
+            .prev-btn
+            .next-btn
           .calendar-count
             ul.count-list
               li.count-list__item.done
@@ -46,8 +53,6 @@ html
             .add_note
         .calendar-notes.hidden
           .calendar-notes__date
-            p.date-title 17 Января
-            p.date-subtitle Воскресенье
           ul.notes-list
             li.notes-list__item
               span.item__date 20:30

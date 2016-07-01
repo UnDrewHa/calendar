@@ -5,17 +5,7 @@
     this.storage = storage;
   }
 
-  Model.prototype.create = function(title, year, month, day, hours, minutes, callback) {
-    var data = {
-      title: title.trim(),
-      year: year,
-      month: month,
-      day: day,
-      hours: hours,
-      minutes: minutes,
-      completed: false
-    };
-
+  Model.prototype.create = function(data, callback) {
     this.storage.save(data, callback);
   };
 

@@ -17,15 +17,23 @@
           <h3>Новая заметка:</h3>
           <div class="new-note__group">
             <label for="note-title">Название:</label>
-            <input id="note-title" type="text">
+            <input id="note-title" type="text" placeholder="Заметка">
           </div>
           <div class="new-note__group">
-            <label for="note-date">Дата:</label>
-            <input id="note-date" type="text">
+            <label for="date-y">Год:</label>
+            <input id="date-y" type="text" placeholder="2015">
+          </div>
+          <div class="new-note__group">
+            <label for="date-m">Месяц:</label>
+            <input id="date-m" type="text" placeholder="9">
+          </div>
+          <div class="new-note__group">
+            <label for="date-d">День:</label>
+            <input id="date-d" type="text" placeholder="23">
           </div>
           <div class="new-note__group">
             <label for="note-time">Время:</label>
-            <input id="note-time" type="text">
+            <input id="note-time" type="text" placeholder="15:20">
           </div>
           <div class="new-note__group">
             <button class="add-note">Сохранить</button>
@@ -43,8 +51,8 @@
             </ul>
           </header>
           <div class="calendar-main">
-            <div class="calendar__prev"></div>
-            <div class="calendar__next"></div>
+            <div class="prev-btn"></div>
+            <div class="next-btn"></div>
           </div>
           <div class="calendar-count">
             <ul class="count-list">
@@ -56,10 +64,7 @@
           </div>
         </div>
         <div class="calendar-notes hidden">
-          <div class="calendar-notes__date">
-            <p class="date-title">17 Января</p>
-            <p class="date-subtitle">Воскресенье</p>
-          </div>
+          <div class="calendar-notes__date"></div>
           <ul class="notes-list">
             <li class="notes-list__item"><span class="item__date">20:30</span><span class="item__title">Take Volvo and go for a ride</span>
               <div class="helpers-buttons">
