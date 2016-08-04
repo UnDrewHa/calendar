@@ -54,7 +54,7 @@
             { id: 1238,
               title: 'Main note',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 13,
               hours: 15,
               minutes: 30,
@@ -63,7 +63,7 @@
             { id: 1248,
               title: 'Купить порошок',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 13,
               hours: 15,
               minutes: 10,
@@ -72,7 +72,7 @@
             { id: 7865,
               title: 'Another test note',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 20,
               hours: 10,
               minutes: 45,
@@ -81,7 +81,7 @@
             { id: 346,
               title: 'Test note',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 22,
               hours: 12,
               minutes: 12,
@@ -90,7 +90,7 @@
             { id: 897954,
               title: 'Прочитать книгу',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 22,
               hours: 12,
               minutes: 12,
@@ -99,7 +99,7 @@
             { id: 681,
               title: 'Купить слона',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 22,
               hours: 12,
               minutes: 12,
@@ -108,7 +108,7 @@
             { id: 991234,
               title: 'Починить велосипед',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 22,
               hours: 12,
               minutes: 12,
@@ -117,7 +117,7 @@
             { id: 85314,
               title: 'Сходить в магазин',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 22,
               hours: 12,
               minutes: 12,
@@ -126,7 +126,7 @@
             { id: 77964,
               title: 'Посмотреть сериал',
               year: 2016,
-              month: 5,
+              month: 7,
               day: 22,
               hours: 12,
               minutes: 12,
@@ -136,7 +136,7 @@
             { id: 134679,
               title: 'Съесть торт',
               year: 2016,
-              month: 6,
+              month: 7,
               day: 22,
               hours: 12,
               minutes: 12,
@@ -145,7 +145,7 @@
             { id: 3467,
               title: 'Test note',
               year: 2016,
-              month: 6,
+              month: 7,
               day: 3,
               hours: 12,
               minutes: 12,
@@ -332,10 +332,11 @@
       this.month = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
       this.day = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
       this.noteTemplate
-        = "<li data-id='{{id}}' class='notes-list__item {{completed}}'>"
+        = "<li data-id='{{id}}' data-year='{{year}}' data-month='{{month}}' data-day='{{day}}' class='notes-list__item {{completed}}'>"
         +   "<span class='item__date'>{{hours}}:{{minutes}}</span>"
         +   "<span class='item__title'>{{title}}</span>"
         +   "<div class='helpers-buttons'>"
+        +     "<button class='edit-btn'>✐</button>"
         +     "<input type='checkbox' class='toggle' {{checked}}>"
         +     "<button class='destroy-btn'>✕</button>"
         +   "</div>"
@@ -361,6 +362,9 @@
       }
 
       template = template.replace('{{id}}', data[i].id);
+      template = template.replace('{{year}}', data[i].year);
+      template = template.replace('{{month}}', data[i].month);
+      template = template.replace('{{day}}', data[i].day);
       template = template.replace('{{completed}}', completed);
       template = template.replace('{{hours}}', data[i].hours);
       template = template.replace('{{minutes}}', data[i].minutes);
@@ -415,7 +419,9 @@
     this.$noteList = qs('.notes-list');
     this.$countList = qs('.count-list');
     this.$newNoteBlock = qs('.new-note');
+    this.$noteForm = qs('#noteForm');
     this.$noteTitle = qs('#note-title');
+    this.$noteId = qs('#note-id');
     this.$noteDateY = qs('#date-y');
     this.$noteDateM = qs('#date-m');
     this.$noteDateD = qs('#date-d');
@@ -459,12 +465,24 @@
 
   };
 
-  View.prototype._showNewNote = function() {
+  View.prototype._showNewNote = function(data) {
     this.$newNoteBlock.classList.remove("hidden");
+    if (data) {
+      this.$noteId.value = data.id;
+      this.$noteDateY.value = data.year;
+      this.$noteDateM.value = data.month;
+      this.$noteDateD.value = data.day;
+      this.$noteTime.value = data.time;
+      this.$noteTitle.value = data.title;
+    }
   };
 
   View.prototype._hideNewNote = function() {
     this.$newNoteBlock.classList.add("hidden");
+  };
+
+  View.prototype._clearAddingBlock = function() {
+    this.$noteForm.reset();
   };
 
   View.prototype._getDay = function(date) {
@@ -615,8 +633,6 @@
     }
     else if (event === 'toggleItem') {
       $delegate(self.$noteList, '.toggle', 'click', function() {
-        console.log(self._itemId(this));
-        console.log(this.checked);
         handler({id: self._itemId(this), completed: this.checked});
       });
     }
@@ -628,12 +644,26 @@
         self._hideNewNote();
         return;
       });
+      $delegate(self.$noteList, '.edit-btn', 'click', function(e) {
+        var parent = $parent(e.target, 'li'),
+          data = {},
+          time = qs('.item__date', parent),
+          title = qs('.item__title', parent);
+        data.id = parent.dataset.id;
+        data.year = parent.dataset.year;
+        data.month = parent.dataset.month;
+        data.day = parent.dataset.day;
+        data.time = time.innerHTML;
+        data.title = title.innerHTML;
+        self._showNewNote(data);
+      });
       $on(self.$addNote, 'click', function() {
         var time = self.$noteTime.value,
             n = time.indexOf(':');
         console.log(time.slice(0, n));
         console.log(time.slice(n+1, time.length));
         handler({
+          id: +self.$noteId.value,
           title: self.$noteTitle.value,
           year: +self.$noteDateY.value,
           month: +self.$noteDateM.value,
@@ -642,6 +672,7 @@
           minutes: +time.slice(n+1, time.length),
           completed: 0
         });
+        self._clearAddingBlock();
       });
     }
   };
@@ -676,7 +707,6 @@
     self.view.bind('addNote', function (data) {
       self.addNote(data);
     });
-    
   }
 
   Controller.prototype.startView = function() {
@@ -728,13 +758,28 @@
   };
   Controller.prototype.addNote = function(data) {
     var self = this;
-    self.model.create(data, function() {
-      self.view.render('addNote');
-    });
-    self.model.getCount(function(notes) {
-      self.view.render('updateCount', notes);
-    });
+    if (data.id) {
+      var id = data.id;
+      delete data.id;
+      self.model.update(data, function() {
+        self.view.render('addNote');
+      }, id);
+    }
+    else {
+      self.model.create(data, function() {
+        self.view.render('addNote');
+      });
+      self.model.getCount(function(notes) {
+        self.view.render('updateCount', notes);
+      });
+    }
+
   };
+  Controller.prototype.updateNote = function(data) {
+    var self = this;
+    
+  };
+
   
 
   Controller.prototype.showDayNotes = function(date) {

@@ -15,29 +15,78 @@
         <div class="new-note__inner">
           <div class="new-note__close">✕</div>
           <h3>Новая заметка:</h3>
-          <div class="new-note__group">
-            <label for="note-title">Название:</label>
-            <input id="note-title" type="text" placeholder="Заметка">
-          </div>
-          <div class="new-note__group">
-            <label for="date-y">Год:</label>
-            <input id="date-y" type="text" placeholder="2015">
-          </div>
-          <div class="new-note__group">
-            <label for="date-m">Месяц:</label>
-            <input id="date-m" type="text" placeholder="9">
-          </div>
-          <div class="new-note__group">
-            <label for="date-d">День:</label>
-            <input id="date-d" type="text" placeholder="23">
-          </div>
-          <div class="new-note__group">
-            <label for="note-time">Время:</label>
-            <input id="note-time" type="text" placeholder="15:20">
-          </div>
-          <div class="new-note__group">
-            <button class="add-note">Сохранить</button>
-          </div>
+          <form id="noteForm">
+            <input id="note-id" type="hidden">
+            <div class="new-note__group">
+              <label for="note-title">Название:</label>
+              <input id="note-title" type="text" placeholder="Заметка">
+            </div>
+            <div class="new-note__group">
+              <label for="date-y">Год:</label>
+              <input id="date-y" type="text" placeholder="2015">
+            </div>
+            <div class="new-note__group">
+              <label for="date-m">Месяц:</label>
+              <select id="date-m">
+                <option>Месяц</option>
+                <option value="0">Январь</option>
+                <option value="1">Февраль</option>
+                <option value="2">Март</option>
+                <option value="3">Апрель</option>
+                <option value="4">Май</option>
+                <option value="5">Июнь</option>
+                <option value="6">Июль</option>
+                <option value="7">Август</option>
+                <option value="8">Сентябрь</option>
+                <option value="9">Октябрь</option>
+                <option value="10">Ноябрь</option>
+                <option value="11">Декабрь</option>
+              </select>
+            </div>
+            <div class="new-note__group">
+              <label for="date-d">День:</label>
+              <select id="date-d">
+                <option>День</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <option>30</option>
+              </select>
+            </div>
+            <div class="new-note__group">
+              <label for="note-time">Время:</label>
+              <input id="note-time" type="text" placeholder="15:20">
+            </div>
+            <div class="new-note__group">
+              <button class="add-note">Сохранить</button>
+            </div>
+          </form>
         </div>
       </div>
       <div class="calendar">

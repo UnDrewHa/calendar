@@ -16,24 +16,33 @@ html
         .new-note__inner
           .new-note__close ✕
           h3 Новая заметка:
-          .new-note__group
-            label(for='note-title') Название:
-            input(id='note-title' type='text' placeholder='Заметка')
-          .new-note__group
-            label(for='date-y') Год:
-            input(id='date-y' type='text' placeholder='2015')
-          .new-note__group
-            label(for='date-m') Месяц:
-            input(id='date-m' type='text' placeholder='9')
-          .new-note__group
-            label(for='date-d') День:
-            input(id='date-d' type='text' placeholder='23')
+          form(id='noteForm')
+            input(id='note-id' type='hidden')
+            .new-note__group
+              label(for='note-title') Название:
+              input(id='note-title' type='text' placeholder='Заметка')
+            .new-note__group
+              label(for='date-y') Год:
+              input(id='date-y' type='text' placeholder='2015')
 
-          .new-note__group
-            label(for='note-time') Время:
-            input(id='note-time' type='text' placeholder='15:20')
-          .new-note__group
-            button.add-note Сохранить
+            .new-note__group
+              label(for='date-m') Месяц:
+              select(id='date-m')
+                option Месяц
+                each val, index in ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+                  option(value=index)= val
+            .new-note__group
+              label(for='date-d') День:
+              select(id='date-d')
+                option День
+                - for (var i=1; i<=30; i++) {
+                option= i
+                - }
+            .new-note__group
+              label(for='note-time') Время:
+              input(id='note-time' type='text' placeholder='15:20')
+            .new-note__group
+              button.add-note Сохранить
       .calendar
         .calendar-block
           header

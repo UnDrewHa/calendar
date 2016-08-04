@@ -34,10 +34,11 @@
       this.month = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
       this.day = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
       this.noteTemplate
-        = "<li data-id='{{id}}' class='notes-list__item {{completed}}'>"
+        = "<li data-id='{{id}}' data-year='{{year}}' data-month='{{month}}' data-day='{{day}}' class='notes-list__item {{completed}}'>"
         +   "<span class='item__date'>{{hours}}:{{minutes}}</span>"
         +   "<span class='item__title'>{{title}}</span>"
         +   "<div class='helpers-buttons'>"
+        +     "<button class='edit-btn'>✐</button>"
         +     "<input type='checkbox' class='toggle' {{checked}}>"
         +     "<button class='destroy-btn'>✕</button>"
         +   "</div>"
@@ -63,6 +64,9 @@
       }
 
       template = template.replace('{{id}}', data[i].id);
+      template = template.replace('{{year}}', data[i].year);
+      template = template.replace('{{month}}', data[i].month);
+      template = template.replace('{{day}}', data[i].day);
       template = template.replace('{{completed}}', completed);
       template = template.replace('{{hours}}', data[i].hours);
       template = template.replace('{{minutes}}', data[i].minutes);

@@ -25,7 +25,6 @@
     self.view.bind('addNote', function (data) {
       self.addNote(data);
     });
-    
   }
 
   Controller.prototype.startView = function() {
@@ -77,13 +76,28 @@
   };
   Controller.prototype.addNote = function(data) {
     var self = this;
-    self.model.create(data, function() {
-      self.view.render('addNote');
-    });
-    self.model.getCount(function(notes) {
-      self.view.render('updateCount', notes);
-    });
+    if (data.id) {
+      var id = data.id;
+      delete data.id;
+      self.model.update(data, function() {
+        self.view.render('addNote');
+      }, id);
+    }
+    else {
+      self.model.create(data, function() {
+        self.view.render('addNote');
+      });
+      self.model.getCount(function(notes) {
+        self.view.render('updateCount', notes);
+      });
+    }
+
   };
+  Controller.prototype.updateNote = function(data) {
+    var self = this;
+    
+  };
+
   
 
   Controller.prototype.showDayNotes = function(date) {

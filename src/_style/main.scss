@@ -13,7 +13,7 @@ $t-color: #b86fb0;
 html {
   box-sizing: border-box;
   color: #000;
-  font-size: 20px;
+  font-size: 21px;
   height: 100%;
   line-height: 1.4;
 }
@@ -542,6 +542,17 @@ input, button {
       color: #e75a47;
     }
 }
+.edit-btn {
+  vertical-align: middle;
+  background: transparent;
+  border: none;
+  color: #fff;
+  transition: all .3s;
+    &:hover, &:active {
+      color: yellowgreen;
+    }
+}
+
 .notes-list__item + .notes-list__item {
   margin-top: 7.5%;
 }

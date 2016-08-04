@@ -16,7 +16,9 @@
     this.$noteList = qs('.notes-list');
     this.$countList = qs('.count-list');
     this.$newNoteBlock = qs('.new-note');
+    this.$noteForm = qs('#noteForm');
     this.$noteTitle = qs('#note-title');
+    this.$noteId = qs('#note-id');
     this.$noteDateY = qs('#date-y');
     this.$noteDateM = qs('#date-m');
     this.$noteDateD = qs('#date-d');
@@ -60,12 +62,24 @@
 
   };
 
-  View.prototype._showNewNote = function() {
+  View.prototype._showNewNote = function(data) {
     this.$newNoteBlock.classList.remove("hidden");
+    if (data) {
+      this.$noteId.value = data.id;
+      this.$noteDateY.value = data.year;
+      this.$noteDateM.value = data.month;
+      this.$noteDateD.value = data.day;
+      this.$noteTime.value = data.time;
+      this.$noteTitle.value = data.title;
+    }
   };
 
   View.prototype._hideNewNote = function() {
     this.$newNoteBlock.classList.add("hidden");
+  };
+
+  View.prototype._clearAddingBlock = function() {
+    this.$noteForm.reset();
   };
 
   View.prototype._getDay = function(date) {
@@ -216,8 +230,6 @@
     }
     else if (event === 'toggleItem') {
       $delegate(self.$noteList, '.toggle', 'click', function() {
-        console.log(self._itemId(this));
-        console.log(this.checked);
         handler({id: self._itemId(this), completed: this.checked});
       });
     }
@@ -229,12 +241,26 @@
         self._hideNewNote();
         return;
       });
+      $delegate(self.$noteList, '.edit-btn', 'click', function(e) {
+        var parent = $parent(e.target, 'li'),
+          data = {},
+          time = qs('.item__date', parent),
+          title = qs('.item__title', parent);
+        data.id = parent.dataset.id;
+        data.year = parent.dataset.year;
+        data.month = parent.dataset.month;
+        data.day = parent.dataset.day;
+        data.time = time.innerHTML;
+        data.title = title.innerHTML;
+        self._showNewNote(data);
+      });
       $on(self.$addNote, 'click', function() {
         var time = self.$noteTime.value,
             n = time.indexOf(':');
         console.log(time.slice(0, n));
         console.log(time.slice(n+1, time.length));
         handler({
+          id: +self.$noteId.value,
           title: self.$noteTitle.value,
           year: +self.$noteDateY.value,
           month: +self.$noteDateM.value,
@@ -243,6 +269,7 @@
           minutes: +time.slice(n+1, time.length),
           completed: 0
         });
+        self._clearAddingBlock();
       });
     }
   };
