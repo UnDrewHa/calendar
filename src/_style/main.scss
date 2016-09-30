@@ -12,7 +12,7 @@ $t-color: #b86fb0;
 
 html {
   box-sizing: border-box;
-  color: #000;
+  color: #333;
   font-size: 21px;
   height: 100%;
   line-height: 1.4;
@@ -120,30 +120,32 @@ ul {
   margin: 0 auto;
   max-width: 1400px;
 }
+
 .new-note {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0,0,0, .4);
+  background: rgba(0, 0, 0, .4);
   opacity: 1;
   z-index: 200;
 }
+
 .new-note__inner {
   position: absolute;
   top: 50%;
   left: 50%;
   background: #fff;
-  box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, .3);
   padding: 10px 20px 40px;
   transform: translate(-50%, -50%);
   width: 500px;
-    h3 {
-      color: #8c9094;
-      font: 300 1.25rem/1 $sans;
-      margin: 1em 0 0;
-    }
+  h3 {
+    color: #8c9094;
+    font: 300 1.25rem/1 $sans;
+    margin: 1em 0 0;
+  }
   .new-note__group {
     border-top: 1px solid #f6f6f6;
     display: flex;
@@ -152,10 +154,10 @@ ul {
     margin: 1em 0 0;
     padding: 1em 0 0;
     width: 100%;
-      &:last-child {
-        display: block;
-        text-align: right;
-      }
+    &:last-child {
+      display: block;
+      text-align: right;
+    }
   }
   label {
     color: #8c9094;
@@ -171,7 +173,7 @@ ul {
     background: #26a69a;
     border: 0;
     border-radius: 2px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
     font: .9rem $sans;
     outline: none;
@@ -180,13 +182,14 @@ ul {
     padding: .25em .75em;
     text-transform: uppercase;
     transition: all .3s;
-      &:hover {
-        background: #2bbbad;
-        box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
-      }
+    &:hover {
+      background: #2bbbad;
+      box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    }
 
   }
 }
+
 .new-note__close {
   position: absolute;
   top: 2%;
@@ -212,12 +215,11 @@ ul {
 
 .calendar-notes {
   background: #504aa4;
-  background: linear-gradient(to bottom,  #504aa4 0%,#4267b5 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#504aa4', endColorstr='#4267b5',GradientType=0 );
+  background: linear-gradient(to bottom, #504aa4 0%, #4267b5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#504aa4', endColorstr='#4267b5', GradientType=0);
   height: 100%;
   width: 35%;
 }
-
 
 header {
   background: #f5f5f3;
@@ -237,25 +239,25 @@ header {
 .calendar-main__nav {
   align-self: center;
   white-space: nowrap;
-    li {
-      background: transparent;
-      border: 1px solid transparent;
+  li {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: .5em;
+    color: #898d90;
+    cursor: pointer;
+    display: inline-block;
+    font: .75rem/1 $sans;
+    padding: .5em;
+    transition: all .4s;
+    &.active {
+      background: #fff;
+      border: 1px solid #e3e3e1;
       border-radius: .5em;
-      color: #898d90;
-      cursor: pointer;
-      display: inline-block;
-      font: .75rem/1 $sans;
-      padding: .5em;
-      transition: all .4s;
-        &.active {
-          background: #fff;
-          border: 1px solid #e3e3e1;
-          border-radius: .5em;
-        }
     }
-    li + li {
-      margin-left: .5em;
-    }
+  }
+  li + li {
+    margin-left: .5em;
+  }
 }
 
 .calendar-main {
@@ -263,6 +265,7 @@ header {
   position: relative;
   width: 85%;
 }
+
 .calendar__wrap {
   .row:first-child {
     border-bottom: 2px solid #efefec;
@@ -278,6 +281,7 @@ header {
   margin: 1rem auto;
   width: 85%;
 }
+
 .col {
   color: #575e64;
   cursor: pointer;
@@ -289,40 +293,44 @@ header {
   text-transform: uppercase;
   transition: all .3s;
   width: 2.5rem;
-    &.unactive {
-      color: #d6d6ce;
-    }
+  &#today {
+    background: mediumpurple;
+    color: #fff;
+  }
+  &.unactive {
+    color: #d6d6ce;
+  }
   &:hover {
     font-weight: bold;
   }
-    &.selected {
-      box-shadow: 0 0 10px 0 #4267b5;
-      color: #fff;
-      background: #4267b5;
-      font-weight: bold;
-    }
-    &.contain {
-      cursor: pointer;
-    }
-    &.contain::before {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #e8aa2e;
-      border-radius: 50%;
-      content: '';
-      display: block;
-      height: .3rem;
-      margin: 0 auto;
-      width: .3rem;
-    }
-    &.contain.done::before {
-      background: #2dbd9b;
-    }
-    &.selected.contain::before {
-      display: none;
-    }
+  &.selected {
+    box-shadow: 0 0 10px 0 #4267b5;
+    color: #fff;
+    background: #4267b5;
+    font-weight: bold;
+  }
+  &.contain {
+    cursor: pointer;
+  }
+  &.contain::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: yellowgreen;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: .3rem;
+    margin: 0 auto;
+    width: .3rem;
+  }
+  &.contain.done::before {
+    background: #2dbd9b;
+  }
+  &.selected.contain::before {
+    display: none;
+  }
 }
 
 .prev-btn {
@@ -370,34 +378,34 @@ header {
   display: inline-block;
   font: 1.2rem/1.4 $sans;
   position: relative;
-    span {
-      display: block;
-      font-size: 2em;
-      font-weight: 300;
-    }
-    &.done {
-      color: #2dbd9b;
-    }
-    &.undone {
-      color: #e8aa2e;
-    }
-    &.all {
-      color: #8c9094;
-    }
+  span {
+    display: block;
+    font-size: 2em;
+    font-weight: 300;
+  }
+  &.done {
+    color: #2dbd9b;
+  }
+  &.undone {
+    color: #e8aa2e;
+  }
+  &.all {
+    color: #8c9094;
+  }
 }
 
 .count-list__item + .count-list__item {
   margin-left: 10%;
-    &::before {
-      position: absolute;
-      top: 50%;
-      left: -2rem;
-      background: #d6d6ce;
-      border-radius: 50%;
-      content: '';
-      height: .4rem;
-      width: .4rem;
-    }
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: -2rem;
+    background: #d6d6ce;
+    border-radius: 50%;
+    content: '';
+    height: .4rem;
+    width: .4rem;
+  }
 }
 
 .add_note {
@@ -408,30 +416,30 @@ header {
   position: relative;
   transition: all .3s;
   width: 2.5rem;
-    &::before {
-      color: #fff;
-      content: '+';
-      display: block;
-      font: 2rem/2.4rem $sans;
-      text-align: center;
-    }
-    &:hover {
-      box-shadow: 0 0 10px 0 #2dbd9b;
-      transform: rotate(-90deg);
-    }
+  &::before {
+    color: #fff;
+    content: '+';
+    display: block;
+    font: 2rem/2.4rem $sans;
+    text-align: center;
+  }
+  &:hover {
+    box-shadow: 0 0 10px 0 #2dbd9b;
+    transform: rotate(-90deg);
+  }
 }
 
 .calendar-notes {
   color: #fff;
   font-family: $sans;
   padding: 0;
-    p {
-      margin: 0;
-    }
-    footer {
-      display: none;
-      margin-top: 5%;
-    }
+  p {
+    margin: 0;
+  }
+  footer {
+    display: none;
+    margin-top: 5%;
+  }
 }
 
 .delete-comp {
@@ -449,13 +457,14 @@ header {
   font-size: 1rem;
   font-weight: 300;
 }
+
 .date-subtitle {
   font-size: 2rem;
   line-height: .8;
 }
 
 .notes-list {
-  border-left: 2px solid rgba(255,255,255,.5);
+  border-left: 2px solid rgba(255, 255, 255, .5);
   margin: 15% 0 0 12.5%;
   padding-left: 12.5%;
   position: relative;
@@ -464,44 +473,46 @@ header {
 .notes-list__item {
   font-weight: 300;
   position: relative;
+  .item__date {
+    position: absolute;
+    top: 0;
+    left: -4.4rem;
+    background: #e8aa2e;
+    border-radius: .5em;
+    display: inline-block;
+    font-size: .75rem;
+    padding: .3em .5em;
+    transition: all .3s;
+  }
+
+  .item__title {
+    display: inline-block;
+    max-width: 70%;
+    transition: all .3s;
+    vertical-align: middle;
+  }
+
+  &.completed {
     .item__date {
-      position: absolute;
-      top: 0;
-      left: -4.4rem;
-      background: #e8aa2e;
-      border-radius: .5em;
-      display: inline-block;
-      font-size: .75rem;
-      padding: .3em .5em;
-      transition: all .3s;
+      background: #2dbd9b;
     }
-  
     .item__title {
-      display: inline-block;
-      max-width: 70%;
-      transition: all .3s;
-      vertical-align: middle;
+      opacity: .3;
+      text-decoration: line-through;
     }
+  }
 
-    &.completed {
-      .item__date {
-        background: #2dbd9b;
-      }
-      .item__title {
-        opacity: .3;
-        text-decoration: line-through;
-      }
+  &:hover {
+    .helpers-buttons {
+      opacity: 1;
     }
-
-    &:hover {
-      .helpers-buttons {
-        opacity: 1;
-      }
-    }
+  }
 }
+
 input, button {
   outline: none;
 }
+
 .helpers-buttons {
   position: absolute;
   top: 50%;
@@ -509,11 +520,12 @@ input, button {
   opacity: 0;
   transition: all .3s;
   transform: translateY(-50%);
-    input, button {
-      cursor: pointer;
-      outline: none;
-    }
+  input, button {
+    cursor: pointer;
+    outline: none;
+  }
 }
+
 .toggle {
   vertical-align: middle;
   text-align: center;
@@ -538,24 +550,26 @@ input, button {
   border: none;
   color: #e8aa2e;
   transition: all .3s;
-    &:hover, &:active {
-      color: #e75a47;
-    }
+  &:hover, &:active {
+    color: #e75a47;
+  }
 }
+
 .edit-btn {
   vertical-align: middle;
   background: transparent;
   border: none;
   color: #fff;
   transition: all .3s;
-    &:hover, &:active {
-      color: yellowgreen;
-    }
+  &:hover, &:active {
+    color: yellowgreen;
+  }
 }
 
 .notes-list__item + .notes-list__item {
   margin-top: 7.5%;
 }
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

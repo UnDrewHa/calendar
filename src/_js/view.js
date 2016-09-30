@@ -121,12 +121,16 @@
         }
 
         while (d.getMonth() == mon) {
-          table += "<div class='col' data-date='" + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + "'>" + d.getDate() + "</div>";
+          var todayDay = '' + d.getDate() + '-' + d.getMonth() + '-' + d.getYear();
+          var todayDay2 = '' + new Date().getDate() + '-' + new Date().getMonth() + '-' + new Date().getYear();
+
+          var id = todayDay === todayDay2 ? 'today' : '';
+          table += "<div id='{{id}}' class='col' data-date='" + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + "'>" + d.getDate() + "</div>";
 
           if (self._getDay(d) % 7 == 6) {
             table += "</div><div class='row'>";
           }
-
+          table = table.replace('{{id}}', id);
           d.setDate(d.getDate() + 1);
         }
         if (self._getDay(d) != 0) {
